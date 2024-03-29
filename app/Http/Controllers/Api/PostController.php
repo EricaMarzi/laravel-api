@@ -13,7 +13,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::whereIsPublished(true)->latest()->get();
+
+        foreach ($posts as $post) {
+            if ($post->image) $post->image = url('storage/' . $post->image);
+        }
+
         return response()->json($posts);
     }
 
