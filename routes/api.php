@@ -21,8 +21,10 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/{post}', [PostController::class, 'show']);
-Route::post('/posts', [PostController::class, 'store']);
-Route::delete('/posts/{post}', [PostController::class, 'destroy']);
-Route::put('/posts/{post}', [PostController::class, 'update']);
+// Route::get('/posts', [PostController::class, 'index']);
+// Route::get('/posts/{post}', [PostController::class, 'show']);
+// Route::post('/posts', [PostController::class, 'store']);
+// Route::delete('/posts/{post}', [PostController::class, 'destroy']);
+// Route::put('/posts/{post}', [PostController::class, 'update']);
+
+Route::apiResource('posts', Postcontroller::class)->only('index');
