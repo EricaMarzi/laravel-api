@@ -28,3 +28,4 @@ use Illuminate\Support\Facades\Route;
 // Route::put('/posts/{post}', [PostController::class, 'update']);
 
 Route::apiResource('posts', Postcontroller::class)->only('index');
+Route::get('post/{id}', [PostController::class, 'show']);

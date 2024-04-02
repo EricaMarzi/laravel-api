@@ -33,9 +33,12 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(string $id)
     {
-        //
+        $post = Post::whereIsPublishe(true)->find($id);
+        if (!$post) return response(null, 404);
+
+        return response()->json($post);
     }
 
     /**
