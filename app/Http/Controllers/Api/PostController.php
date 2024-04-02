@@ -35,7 +35,7 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        $post = Post::whereIsPublishe(true)->find($id);
+        $post = Post::whereIsPublished(true)->find($id);
         if (!$post) return response(null, 404);
 
         return response()->json($post);
