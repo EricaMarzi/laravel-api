@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::whereIsPublished(true)->latest()->get();
+        $posts = Post::whereIsPublished(true)->latest()->with('category')->get();
 
         foreach ($posts as $post) {
             if ($post->image) $post->image = url('storage/' . $post->image);
