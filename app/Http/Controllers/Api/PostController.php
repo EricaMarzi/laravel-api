@@ -36,6 +36,7 @@ class PostController extends Controller
     public function show(string $id)
     {
         $post = Post::whereIsPublished(true)->find($id);
+        if ($post->image) $post->image = url('storage/' . $post->image);
         if (!$post) return response(null, 404);
 
         return response()->json($post);
