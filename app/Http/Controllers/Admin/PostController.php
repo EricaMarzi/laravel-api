@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -44,11 +45,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        Log::debug('store - 1');
         $request->validate([
-            'title' => 'required|string|min:5|max:50|unique:posts',
+            'title' => 'required|string|unique:posts',
             'content' => 'required|string',
             'image' => 'nullable|image',
-            'is_published' => 'nullable|boolean',
             'category_id' => 'nullable|exists:categories,id',
             'tags' => 'nullable|exists:tags,id'
         ], [
@@ -61,9 +62,10 @@ class PostController extends Controller
             'category_id.exists' => 'Categoria non valida',
             'tags.exists' => 'Tag non validi'
         ]);
-
+        Log::debug('store - 2');
         $data = $request->all();
         $post = new Post();
+        Log::debug('store - 3');
         $post->fill($data);
         $post->slug = Str::slug($post->title);
         $post->is_published = array_key_exists('is_published', $data);
