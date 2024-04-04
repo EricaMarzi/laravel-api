@@ -36,7 +36,7 @@ class PostController extends Controller
     public function show(string $slug)
     {
         // $post = Post::whereIsPublished(true)->find($id);
-        $post = Post::whereIsPublished(true)->whereSlug($slug)->first();
+        $post = Post::whereIsPublished(true)->whereSlug($slug)->with('category', 'tags')->first();
         if ($post->image) $post->image = url('storage/' . $post->image);
         if (!$post) return response(null, 404);
 
